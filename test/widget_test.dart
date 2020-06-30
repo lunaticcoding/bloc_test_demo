@@ -11,6 +11,8 @@ import 'package:bloc_test_demo/concrete_value_object.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  // Note this was an imageFixture in my case. I just used an int
+  // with Future.value to make it simpler for this demo.
   int asyncNumber; // or image data
 
   setUpAll(() async {
@@ -31,5 +33,16 @@ void main() {
     build: () async => MyBlocBloc(),
     act: (bloc) async => bloc.add(MyConcreteBlocEvent(asyncNumber)),
     expect: [MyBlocSecondState(ConcreteValueObject(asyncNumber))],
+  );
+
+  int someOtherAsyncNumber;
+  blocTest(
+    "alternative",
+    build: () async {
+      someOtherAsyncNumber = await Future.value(23);
+      return MyBlocBloc();
+    },
+    act: (bloc) async => bloc.add(MyConcreteBlocEvent(someOtherAsyncNumber)),
+    expect: [MyBlocSecondState(ConcreteValueObject(someOtherAsyncNumber))],
   );
 }
