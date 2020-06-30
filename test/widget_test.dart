@@ -21,7 +21,7 @@ void main() {
     "unwrap in the tests then, because I know it will be valid because of"
     "the setUpAll). "
     ""
-    "I also considered making the expected iterable a function but I was hesitant"
+    "I also considered making the expect iterable a function but I was hesitant"
     "suggest breaking changes. ",
     build: () async => MyBlocBloc(),
     act: (bloc) async => bloc.add(MyConcreteBlocEvent(asyncNumber)),
